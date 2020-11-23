@@ -39,3 +39,17 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 2. Run ProductApp.java
 3. Open [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) with your browser to see the result.
 
+## API List
+* สร้างรายการสินค้า (createProduct)
+* สร้างหมวดหมู่ของรายการสินค้า (createCategory)
+* สร้างตัวเลือกของรายการสินค้า (createOption)
+* ลบรายการสินค้า (deleteProduct)
+* ลบตัวเลือกของรายการสินค้า (deleteOption)
+* ลบรูปภาพของตัวเลือกของรายการสินค้า (deletePicture)
+* ดึงข้อมูลสินค้าด้วยรหัสรายการสินค้า (getById)
+* ดึงข้อมูลตัวเลือกของรายการสินค้าด้วยรหัสรายการสินค้า (getOptionsฺByProductId)
+* ดึงข้อมูลรายการสินค้าทั้งหมด (getAll)
+* ดึงข้อมูลรายการสินค้าด้วยรหัสร้านค้า (getByShop)
+* แก้ไขข้อมูลรายการสินค้า (updateProduct)
+* แก้ไขข้อมูลตัวเลือกของรายการสินค้า (updateOption)
+* แก้ไขหมวดหมู่ของรายการสินค้า (updateCategory)
