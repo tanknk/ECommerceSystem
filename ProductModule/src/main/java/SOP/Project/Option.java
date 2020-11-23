@@ -10,10 +10,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Option implements Serializable {
-	private int id, amount;
-	private String name, picture;
+	private int amount;
+	private String id, name, picture;
 	private double price, weight;
-	private static int count = 0;
+	private static int count = 1;
 	
 	
 
@@ -25,11 +25,11 @@ public class Option implements Serializable {
 		Option.count = count;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -75,38 +75,7 @@ public class Option implements Serializable {
 	
 	public Option(int amount, String name, String picture, double price, double weight) {
 		super();
-		this.id = ++count;
-		this.amount = amount;
-		this.name = name;
-		this.picture = picture;
-		this.price = price;
-		this.weight = weight;
-	}
-	
-
-	public Option(int amount, String name, String picture, double price, double weight, int productId) {
-		super();
-		File f = new File("product.dat");
-		ArrayList<Integer> array = new ArrayList<Integer>();
-		ArrayList<Option> options = null;
-		if (f.exists()) {
-			try {
-				FileInputStream fin_product = new FileInputStream("product.dat");
-				ObjectInputStream oin_product = new ObjectInputStream(fin_product);
-				ArrayList<Product> products = (ArrayList<Product>) oin_product.readObject();
-				for(int i = 0; i<products.size(); i++) {
-					if(products.get(i).getId() == productId) {
-						options = products.get(i).getOptions();
-					}
-				}
-				count = options.get(options.size() - 1).getId();
-			} catch (EOFException ex) {
-			} catch (FileNotFoundException ex) {
-			} catch (IOException ex) {
-			} catch (ClassNotFoundException ex) {
-			}
-		}
-		this.id = ++count;
+		this.id = count + "";
 		this.amount = amount;
 		this.name = name;
 		this.picture = picture;
