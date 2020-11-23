@@ -153,19 +153,22 @@ public class ProductController {
 	public ResponseEntity<Product> updateProduct(@PathVariable("productId") int productId, String name, String picture,
 			String description, int[] categorysId) {
 		Product product = null;
+		ArrayList<Category> category = null;
 		for (int i = 0; i < products.size(); i++) {
 			if (products.get(i).getId() == productId) {
 				product = products.get(i);
 			}
 		}
-		ArrayList<Category> category = new ArrayList<Category>();
-		for (int i = 0; i < categorys.size(); i++) {
-			for (int j = 0; j < categorysId.length; j++) {
-				if (categorysId[j] == categorys.get(i).getId()) {
-					category.add(categorys.get(i));
+		if (categorysId != null) {
+			category = new ArrayList<Category>();
+			for (int i = 0; i < categorys.size(); i++) {
+				for (int j = 0; j < categorysId.length; j++) {
+					if (categorysId[j] == categorys.get(i).getId()) {
+						category.add(categorys.get(i));
+					}
 				}
-			}
 
+			}
 		}
 		if (name != null) {
 			product.setName(name);
