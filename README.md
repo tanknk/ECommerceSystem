@@ -59,3 +59,8 @@ yarn dev
 * แก้ไขข้อมูลรายการสินค้า (updateProduct)
 * แก้ไขข้อมูลตัวเลือกของรายการสินค้า (updateOption)
 * แก้ไขหมวดหมู่ของรายการสินค้า (updateCategory)
+
+## Module อื่น ๆ ที่เกี่ยวข้อง
+* [Module Shop](https://github.com/Peechanok/Group-Lamp-SOP)
+* [Module Shipping](https://github.com/AnTznimalz/SOP_ShippingModule)
+* [Module Review](https://github.com/looksocii/SOP_API)
