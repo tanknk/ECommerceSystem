@@ -28,7 +28,7 @@
 โดยที่ภายใน Github Repo นี้จะประกอบไปด้วย Maven Project ที่ใช้ในการเข้าถึง Swagger และหน้าเว็บไซต์ที่จัดทำด้วย Next.js จึงต้องมีการรัน 2 ส่วนแยกจากกัน
 ได้แก่
 ## Website
-0. Open this project as folder (Visual Code Studio)
+0. Open this project as folder (Visual Studio Code)
 1. type **yarn install** in terminal
 2. run the development server with this commind in terminal:
 ```bash
