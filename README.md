@@ -28,7 +28,7 @@
 โดยที่ภายใน Github Repo นี้จะประกอบไปด้วย Maven Project ที่ใช้ในการเข้าถึง Swagger และหน้าเว็บไซต์ที่จัดทำด้วย Next.js จึงต้องมีการรัน 2 ส่วนแยกจากกัน
 ได้แก่
 ## Front End
-0. Open this project as folder
+0. Open this project as folder (Visual Code Studio)
 1. type **yarn install** in terminal
 2. run the development server with this commind in terminal:
 ```bash
@@ -40,7 +40,7 @@ yarn dev
 
 ## Swagger
 **โฟลเดอร์ที่มีชื่อว่า ProductModule คือ Maven Project ที่ใช้ในการเข้าถึง Swagger ที่จัดการกับ Service ต่าง ๆ ของ Product**
-1. import ProductModule as Project
+1. import ProductModule as Project (Eclipse)
 2. Run ProductApp.java
 3. Open [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) with your browser to see the result.
 
