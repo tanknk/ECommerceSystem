@@ -247,9 +247,8 @@ public class ProductController {
 			}
 		}
 		product.setOptions(options);
-		System.out.println("THIS IS SIZE : " + product.getOptions().size());
 		if (product.getOptions().size() == 0) {
-			System.out.println("ENTER");
+			productService.deleteCategoryProduct(productId);
 			return productService.deleteProduct(productId);
 		}
 		return productService.saveProduct(product);
@@ -259,6 +258,7 @@ public class ProductController {
 	@RequestMapping(value = "/delete/{productId}", method = RequestMethod.DELETE)
 	public String deleteProduct(@PathVariable("productId") String productId)
 			throws InterruptedException, ExecutionException {
+		productService.deleteCategoryProduct(productId);
 		return productService.deleteProduct(productId);
 	}
 }

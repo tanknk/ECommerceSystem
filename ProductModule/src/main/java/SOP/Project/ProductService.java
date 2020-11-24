@@ -160,7 +160,7 @@ public class ProductService {
 			ApiFuture<WriteResult> writeResult = dbFirestore.collection("product_category").document(document.getId())
 					.delete();
 		}
-		return "Document with Patient ID " + productId + " has been deleted";
+		return "Document with Product ID " + productId + " has been deleted";
 	}
 
 	public List<Product> getProductbyCategoryId(String categoryId) throws InterruptedException, ExecutionException {
