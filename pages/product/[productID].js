@@ -38,7 +38,7 @@ const product = () => {
     if (productID !== undefined) {
       const productData = axios.get(process.env.NEXT_PUBLIC_PRODUCT_API ? `${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/${productID}`
         : `/api/product/${productID}`);
-      const reviewData = axios.get(process.env.NEXT_PUBLIC_REVIEW_API ? `${process.env.NEXT_PUBLIC_REVIEW_API}/sop-backup/us-central1/app/api/review` : `/api/review/${productID}`);
+      const reviewData = axios.get(process.env.NEXT_PUBLIC_REVIEW_API ? `${process.env.NEXT_PUBLIC_REVIEW_API}/sop-backup/us-central1/app/api/review` : '/api/review/all');
 
       axios
         .all([productData, reviewData])
@@ -50,7 +50,6 @@ const product = () => {
             const reviewResponseFilter = reviewResponse.filter(
               (item) => (item.product_id.toString() === productID.toString()),
             );
-            // console.log(reviewResponseFilter);
             setReview(reviewResponseFilter);
             return productResponse;
           }),
@@ -58,6 +57,7 @@ const product = () => {
         .then((data) => {
           try {
             axios.get(process.env.NEXT_PUBLIC_SHOP_API ? `${process.env.NEXT_PUBLIC_SHOP_API}/getShop?Shopid=${data.shop_id}` : `/api/shop/${data.shop_id}`).then((res) => {
+              console.log(data.shop_id);
               setShop(res.data);
             });
             axios.get(process.env.NEXT_PUBLIC_SHIPPING_API ? `${process.env.NEXT_PUBLIC_SHIPPING_API}/shipping_option/shop/${data.shop_id}` : `/api/shipping/${data.shop_id}`).then((res) => {
