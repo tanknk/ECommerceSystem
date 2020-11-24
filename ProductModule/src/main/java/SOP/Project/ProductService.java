@@ -136,7 +136,13 @@ public class ProductService {
 	public String deleteProduct(String productId) throws InterruptedException, ExecutionException {
 		Firestore dbFirestore = FirestoreClient.getFirestore();
 		ApiFuture<WriteResult> writeResult = dbFirestore.collection("product").document(productId).delete();
-		return "Document with Patient ID " + productId + " has been deleted";
+		return "Document with Product ID " + productId + " has been deleted";
+	}
+	
+	public String deleteCategory(String categoryId) throws InterruptedException, ExecutionException {
+		Firestore dbFirestore = FirestoreClient.getFirestore();
+		ApiFuture<WriteResult> writeResult = dbFirestore.collection("category").document(categoryId).delete();
+		return "Document with Category ID " + categoryId + " has been deleted";
 	}
 
 	public String saveProductCategory(CategoryProduct catpro) throws InterruptedException, ExecutionException {

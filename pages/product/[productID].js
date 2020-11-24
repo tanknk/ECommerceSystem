@@ -25,9 +25,13 @@ const product = () => {
   const [Review, setReview] = useState(undefined);
 
   const optionHandle = (id) => {
-    setPrice(`฿${Product.options[id - 1].price}`);
-    setItemImage(Product.options[id - 1].picture);
-    setAmount(Product.options[id - 1].amount);
+    for(let i = 0; i<Product.options.length; i++){
+      if(Product.options[i].id == id){
+        setPrice(`฿${Product.options[i].price}`);
+        setItemImage(Product.options[i].picture);
+        setAmount(Product.options[i].amount);
+      }
+    }
   };
 
   useEffect(() => {
@@ -114,7 +118,9 @@ const product = () => {
                     className="mx-1"
                     size="sm"
                     style={{ borderRadius: "0.25rem" }}
-                    onClick={() => optionHandle(item.id)}
+                    onClick={
+                      (() => optionHandle(item.id))
+                    }
                   >
                     {item.name}
                   </ToggleButton>
@@ -140,9 +146,9 @@ const product = () => {
         </Row>
         <hr className="mt-1 mb-3" />
         <Row>
-          <Col lg={2}>
+          {/* <Col lg={2}>
             <Image src={Shop.image} roundedCircle fluid />
-          </Col>
+          </Col> */}
           <Col lg={10}>
             <div>
               <p className="mb-2 text-secondary">รายละเอียดร้าน</p>

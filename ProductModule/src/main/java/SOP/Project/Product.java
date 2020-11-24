@@ -3,8 +3,14 @@ package SOP.Project;
 import java.io.*;
 import java.util.ArrayList;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Product implements Serializable {
 	private static int count = 1;
+	private String shop_id;
+	private String name, picture, description, id;
+	private ArrayList<Option> options;
+	private ArrayList<Category> categorys;
 
 	public static int getCount() {
 		return count;
@@ -13,13 +19,7 @@ public class Product implements Serializable {
 	public static void setCount(int count) {
 		Product.count = count;
 	}
-
-	private String name, picture, description, id, shop_id;
-	private ArrayList<Option> options;
-	private ArrayList<Category> categorys;
 	
-	
-
 	public ArrayList<Category> getCategorys() {
 		return categorys;
 	}

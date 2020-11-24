@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.ApiParam;
 
 @CrossOrigin(allowCredentials = "true")
 @RestController
@@ -59,7 +62,8 @@ public class ProductController {
 	// Create Product
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createProduct(String nameMain, String pictureMain, String description, String[] categorysId,
-			String nameOption, double price, int amount, String pictureOption, double weight, String shop_id)
+			String nameOption, double price, int amount, String pictureOption, double weight,
+			@ApiParam(required = true, type = "String") @RequestParam String shop_id)
 			throws InterruptedException, ExecutionException {
 		ArrayList<Option> option = new ArrayList<Option>();
 		List<Category> categorys = productService.getAllCategory();
@@ -91,10 +95,21 @@ public class ProductController {
 		return productService.saveProduct(product);
 	}
 
+	// Create Category
+	@RequestMapping(value = "/create/category", method = RequestMethod.POST)
+	public String createCategory(String name) throws InterruptedException, ExecutionException {
+		List<Category> category_all = productService.getAllCategory();
+		for (int i = 0; i < category_all.size(); i++) {
+			Category.setCount(Integer.parseInt(category_all.get(i).getId()) + 1);
+		}
+		Category category = new Category(name);
+		return productService.saveCategory(category);
+	}
+
 	// Create Option
 	@RequestMapping(value = "/create/option", method = RequestMethod.POST)
-	public String createOption(String productId, String name, double price, int amount, String picture, double weight)
-			throws InterruptedException, ExecutionException {
+	public String createOption(@ApiParam(required = true, type = "String") @RequestParam String productId, String name,
+			double price, int amount, String picture, double weight) throws InterruptedException, ExecutionException {
 		Product product = productService.getProductbyId(productId);
 		ArrayList<Option> options = new ArrayList<Option>();
 		Option option = null;
@@ -106,17 +121,6 @@ public class ProductController {
 		options.add(option);
 		product.setOptions(options);
 		return productService.saveOption(product);
-	}
-
-	// Create Category
-	@RequestMapping(value = "/create/category", method = RequestMethod.POST)
-	public String createCategory(String name) throws InterruptedException, ExecutionException {
-		List<Category> category_all = productService.getAllCategory();
-		for (int i = 0; i < category_all.size(); i++) {
-			Category.setCount(Integer.parseInt(category_all.get(i).getId()) + 1);
-		}
-		Category category = new Category(name);
-		return productService.saveCategory(category);
 	}
 
 	// Update Product
@@ -209,7 +213,7 @@ public class ProductController {
 			List<Product> product = productService.getProductbyCategoryId(categoryId);
 			for (int i = 0; i < product.size(); i++) {
 				for (int j = 0; j < product.get(i).getCategorys().size(); j++) {
-					if(product.get(i).getCategorys().get(j).getId().equals(categoryId)) {
+					if (product.get(i).getCategorys().get(j).getId().equals(categoryId)) {
 						product.get(i).getCategorys().get(j).setName(name);
 						productService.saveProduct(product.get(i));
 					}
@@ -247,6 +251,11 @@ public class ProductController {
 			}
 		}
 		product.setOptions(options);
+		System.out.println("THIS IS SIZE : " + product.getOptions().size());
+		if (product.getOptions().size() == 0) {
+			System.out.println("ENTER");
+			return productService.deleteProduct(productId);
+		}
 		return productService.saveProduct(product);
 	}
 
@@ -256,51 +265,4 @@ public class ProductController {
 			throws InterruptedException, ExecutionException {
 		return productService.deleteProduct(productId);
 	}
-
-	/*
-	 * public void WriteFile(String fileName) { if (fileName == "product.dat") { try
-	 * { FileOutputStream fout_product = new FileOutputStream("product.dat");
-	 * ObjectOutputStream oout_product = new ObjectOutputStream(fout_product);
-	 * oout_product.writeObject(products); } catch (FileNotFoundException ex) { }
-	 * catch (IOException ex) { } } else if (fileName == "category.dat") { try {
-	 * FileOutputStream fout_category = new FileOutputStream("category.dat");
-	 * ObjectOutputStream oout_category = new ObjectOutputStream(fout_category);
-	 * oout_category.writeObject(categorys); } catch (FileNotFoundException ex) { }
-	 * catch (IOException ex) { } } else { try { FileOutputStream fout_product = new
-	 * FileOutputStream("product.dat"); FileOutputStream fout_category = new
-	 * FileOutputStream("category.dat"); ObjectOutputStream oout_product = new
-	 * ObjectOutputStream(fout_product); ObjectOutputStream oout_category = new
-	 * ObjectOutputStream(fout_category); categorys.add(new Category("Gaming"));
-	 * oout_category.writeObject(categorys); products.add(new
-	 * Product("Nintendo Switch™ Joy-Con Controllers",
-	 * "https://cf.shopee.co.th/file/1d840ac92507ef12dbbfa9cb299012ed_tn",
-	 * "Nintendo Switch™ Joy-Con Controllers สินค้าของแท้ กล่องญี่ปุ่น", new
-	 * ArrayList<Category>(Arrays.asList(categorys.get(0))), new
-	 * ArrayList<Option>(Arrays.asList(new Option(5, "แดงฟ้า Neon",
-	 * "https://cf.shopee.co.th/file/1d840ac92507ef12dbbfa9cb299012ed_tn", 2490.0,
-	 * 0.049), new Option(7, "ม่วงส้ม PurpleOrange",
-	 * "https://cf.shopee.co.th/file/7dff664bb3aee95f4211a77b59f0beb3", 2500.0,
-	 * 0.049), new Option(3, "เขียวชมพู GreenPink",
-	 * "https://j.lnwfile.com/8p5jwe.jpg", 2590.0, 0.049))), 1));
-	 * Option.setCount(0); products.add(new Product("Nintendo Switch V2 (Neon)",
-	 * "https://fn.lnwfile.com/q9q0jr.jpg", "เครื่องนอกประกันร้าน สินค้าของแท้", new
-	 * ArrayList<Category>(Arrays.asList(categorys.get(0))), new
-	 * ArrayList<Option>(Arrays.asList( new Option(15, "แดงฟ้า Neon",
-	 * "https://fn.lnwfile.com/q9q0jr.jpg", 10990.0, 0.297))), 2));
-	 * oout_product.writeObject(products); } catch (FileNotFoundException ex) {
-	 * System.out.println(ex); } catch (IOException ex) { System.out.println(ex); }
-	 * } }
-	 */
-
-	/*
-	 * public void ReadFile() { try { FileInputStream fin_product = new
-	 * FileInputStream("product.dat"); FileInputStream fin_category = new
-	 * FileInputStream("category.dat"); ObjectInputStream oin_product = new
-	 * ObjectInputStream(fin_product); ObjectInputStream oin_category = new
-	 * ObjectInputStream(fin_category); products = (ArrayList<Product>)
-	 * oin_product.readObject(); categorys = (ArrayList<Category>)
-	 * oin_category.readObject(); } catch (EOFException ex) { } catch
-	 * (FileNotFoundException ex) { } catch (IOException ex) { } catch
-	 * (ClassNotFoundException ex) { } }
-	 */
 }
