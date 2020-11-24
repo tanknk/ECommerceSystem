@@ -24,10 +24,10 @@
 ![Image of Service Diagram](https://github.com/tanknk/ECommerceSystem/blob/main/images/service.png)
 
 # วิธีการใช้งาน (สำคัญ)
-ในการทดสอบการใช้งานกับหน้าเว็บไซต์จำลองจำเป็นที่จะต้องรัน Front End และ Swagger ไปในเวลาเดียวกัน เพื่อให้หน้าเว็บไซต์สามารถดึง API จาก Swagger ได้
+ในการทดสอบการใช้งานกับหน้าเว็บไซต์จำลองจำเป็นที่จะต้องรัน Website และ Swagger ไปในเวลาเดียวกัน เพื่อให้หน้าเว็บไซต์สามารถดึง API จาก Swagger ได้
 โดยที่ภายใน Github Repo นี้จะประกอบไปด้วย Maven Project ที่ใช้ในการเข้าถึง Swagger และหน้าเว็บไซต์ที่จัดทำด้วย Next.js จึงต้องมีการรัน 2 ส่วนแยกจากกัน
 ได้แก่
-## Front End
+## Website
 0. Open this project as folder (Visual Code Studio)
 1. type **yarn install** in terminal
 2. run the development server with this commind in terminal:
