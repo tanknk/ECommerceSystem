@@ -206,6 +206,15 @@ public class ProductController {
 		}
 		if (name != null) {
 			category.setName(name);
+			List<Product> product = productService.getProductbyCategoryId(categoryId);
+			for (int i = 0; i < product.size(); i++) {
+				for (int j = 0; j < product.get(i).getCategorys().size(); j++) {
+					if(product.get(i).getCategorys().get(j).getId().equals(categoryId)) {
+						product.get(i).getCategorys().get(j).setName(name);
+						productService.saveProduct(product.get(i));
+					}
+				}
+			}
 		}
 		return productService.saveCategory(category);
 	}
