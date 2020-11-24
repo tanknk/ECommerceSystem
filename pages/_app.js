@@ -5,11 +5,11 @@ import { Container, Navbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
-function MyApp({ Component, pageProps }) {  
+function MyApp({ Component, pageProps }) {
   return (
     <div>
       <Navbar expand="lg" variant="dark" bg="dark">
-        <Link href="/">
+        <Link href="/list">
           <Navbar.Brand style={{ cursor: 'pointer' }}><FontAwesomeIcon icon={faHome} style={{ height: '1.5em' }} /></Navbar.Brand>
         </Link>
       </Navbar>
