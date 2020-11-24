@@ -19,6 +19,10 @@
   <!-- end of the list -->
 และนอกจากนี้ยังได้จัดทำ Swagger ซึ่งสามารถใช้งานได้จริงควบคู่ไปพร้อมกับหน้าเว็บไซต์จำลอง
 
+
+## Service Diagram (Product)
+![Image of Service Diagram](https://github.com/tanknk/ECommerceSystem/blob/main/images/service.png)
+
 ## วิธีการใช้งาน
 ในการทดสอบการใช้งานกับหน้าเว็บไซต์จำลองจำเป็นที่จะต้องรัน Front End และ Swagger ไปในเวลาเดียวกัน เพื่อให้หน้าเว็บไซต์สามารถดึง API จาก Swagger ได้
 ### Front End
