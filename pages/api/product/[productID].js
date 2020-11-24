@@ -18,7 +18,7 @@ export default (req, res) => {
         {
           id: 1,
           amount: 5,
-          name: ' ',
+          name: 'แดงฟ้า Neon',
           price: 2490,
           picture: '/images/1/RedCyan.jpeg',
           weight: 0.049,
@@ -26,7 +26,7 @@ export default (req, res) => {
         {
           id: 2,
           amount: 7,
-          name: 'ม่วงส้ม',
+          name: 'ม่วงส้ม PurpleOrange',
           price: 2500,
           picture: '/images/1/PurpleOrange.jpeg',
           weight: 0.049,
