@@ -260,7 +260,7 @@ public class ProductController {
 	}
 
 	// Delete Product
-	@RequestMapping(value = "/delete/{productId}/", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete/{productId}", method = RequestMethod.DELETE)
 	public String deleteProduct(@PathVariable("productId") String productId)
 			throws InterruptedException, ExecutionException {
 		return productService.deleteProduct(productId);
