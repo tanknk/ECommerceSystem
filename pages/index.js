@@ -1,24 +1,24 @@
-import Head from "next/head";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { Form, Button, Col, Row } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import ItemCard from "../components/ItemCard";
+import Head from 'next/head';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import {
+  Form, Button, Col, Row,
+} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import ItemCard from '../components/ItemCard';
 
 export default function Home() {
   const [Product, setProduct] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/product/get/all")
-      .then(function (res) {
+      .get(process.env.NEXT_PUBLIC_PRODUCT_API ? `${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/all` : '/api/product/all')
+      .then((res) => {
         setProduct(res.data);
       })
-      .catch(function (error) {
+      .catch((error) => {
       });
   }, []);
-
-  
 
   return (
     <div>
@@ -37,7 +37,7 @@ export default function Home() {
           </Col>
           <Col xs="auto" md="auto" lg="auto" className="mr-auto">
             <Button>
-              <FontAwesomeIcon icon={faSearch} style={{ height: "1em" }} />
+              <FontAwesomeIcon icon={faSearch} style={{ height: '1em' }} />
             </Button>
           </Col>
         </Form.Row>
@@ -52,7 +52,7 @@ export default function Home() {
             const optionData = data.options;
             const minPrice = Math.min(...optionData.map((el) => el.price));
             const maxPrice = Math.max(...optionData.map((el) => el.price));
-           
+
             return (
               <ItemCard
                 key={data.id}

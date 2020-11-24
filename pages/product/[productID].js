@@ -36,10 +36,10 @@ const product = () => {
 
   useEffect(() => {
     if (productID !== undefined) {
-      const productData = axios.get(
-        `http://localhost:8080/product/get/${productID}`
+      const productData = axios.get(process.env.NEXT_PUBLIC_PRODUCT_API ? `${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/${productID}` :
+      `/api/product/${productID}`
       );
-      const reviewData = axios.get(`/api/review/${productID}`);
+      const reviewData = axios.get(process.env.NEXT_PUBLIC_REVIEW_API ? `` : `/api/review/${productID}`);
 
       axios
         .all([productData, reviewData])
@@ -54,13 +54,14 @@ const product = () => {
         )
         .then((data) => {
           try {
-            axios.get(`/api/shop/${data.shop_id}`).then((res) => {
+            axios.get(process.env.NEXT_PUBLIC_SHOP_API ? `` : `/api/shop/${data.shop_id}`).then((res) => {
               setShop(res.data);
             });
-            axios.get(`/api/shipping/${data.shop_id}`).then((res) => {
+            axios.get(process.env.NEXT_PUBLIC_SHIPPING_API ? `${process.env.NEXT_PUBLIC_SHIPPING_API}/shipping_option/shop/${data.shop_id}` : `/api/shipping/${data.shop_id}`).then((res) => {
               setShipping(res.data);
             });
           } catch (error) {
+            console.log(error)
             router.push("/");
           }
         });
