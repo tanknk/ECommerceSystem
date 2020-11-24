@@ -23,9 +23,12 @@
 ## Service Diagram (Product)
 ![Image of Service Diagram](https://github.com/tanknk/ECommerceSystem/blob/main/images/service.png)
 
-## วิธีการใช้งาน
+# วิธีการใช้งาน (สำคัญ)
 ในการทดสอบการใช้งานกับหน้าเว็บไซต์จำลองจำเป็นที่จะต้องรัน Front End และ Swagger ไปในเวลาเดียวกัน เพื่อให้หน้าเว็บไซต์สามารถดึง API จาก Swagger ได้
-### Front End
+โดยที่ภายใน Github Repo นี้จะประกอบไปด้วย Maven Project ที่ใช้ในการเข้าถึง Swagger และหน้าเว็บไซต์ที่จัดทำด้วย Next.js จึงต้องมีการรัน 2 ส่วนแยกจากกัน
+ได้แก่
+## Front End
+0. Open this project as folder
 1. type **yarn install** in terminal
 2. run the development server with this commind in terminal:
 ```bash
@@ -35,7 +38,8 @@ yarn dev
 ```
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Swagger
+## Swagger
+**โฟลเดอร์ที่มีชื่อว่า ProductModule คือ Maven Project ที่ใช้ในการเข้าถึง Swagger ที่จัดการกับ Service ต่าง ๆ ของ Product**
 1. import ProductModule as Project
 2. Run ProductApp.java
 3. Open [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) with your browser to see the result.
