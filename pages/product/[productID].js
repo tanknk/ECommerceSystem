@@ -36,7 +36,7 @@ const product = () => {
 
   useEffect(() => {
     if (productID !== undefined) {
-      const productData = axios.get(process.env.NEXT_PUBLIC_PRODUCT_API ? `${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/${productID}`
+      const productData = axios.get(process.env.NEXT_PUBLIC_PRODUCT_API ? `http://${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/${productID}`
         : `/api/product/${productID}`);
       const reviewData = axios.get(process.env.NEXT_PUBLIC_REVIEW_API ? `${process.env.NEXT_PUBLIC_REVIEW_API}/sop-backup/us-central1/app/api/review` : '/api/review/all');
 

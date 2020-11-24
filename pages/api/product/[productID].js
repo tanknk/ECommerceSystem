@@ -17,13 +17,15 @@ export default (req, res) => {
       options: [
         {
           id: 1,
-          name: 'แดงฟ้า Neon',
+          amount: 5,
+          name: ' ',
           price: 2490,
           picture: '/images/1/RedCyan.jpeg',
           weight: 0.049,
         },
         {
           id: 2,
+          amount: 7,
           name: 'ม่วงส้ม',
           price: 2500,
           picture: '/images/1/PurpleOrange.jpeg',
@@ -31,6 +33,7 @@ export default (req, res) => {
         },
         {
           id: 3,
+          amount: 0,
           name: 'เขียวชมพู GreenPink',
           price: 2590,
           picture: '/images/1/GreenPink.jpeg',
@@ -46,7 +49,7 @@ export default (req, res) => {
     },
     {
       id: 2,
-      name: 'Nintendo Switch V2 (Neon)',
+      name: 'Nintendo Switch V2',
       description: 'เครื่องนอกประกันร้าน สินค้าของแท้',
       picture: '/images/2/switch.jpg',
       category: {
@@ -57,11 +60,12 @@ export default (req, res) => {
         id: 1,
         name: 'Nintendo',
       },
-      shop_id: 0,
+      shop_id: 2,
       options: [
         {
           id: 1,
-          name: 'แดงฟ้า Neon',
+          amount: 15,
+          name: 'ดำ Black',
           price: 10990,
           picture: '/images/2/switch.jpg',
           weight: 0.297,

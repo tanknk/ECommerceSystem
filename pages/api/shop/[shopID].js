@@ -13,7 +13,7 @@ export default (req, res) => {
       // image: '/images/shop/1/shop.png',
     },
     {
-      id: 0,
+      id: 2,
       sales_id: 2,
       description: 'ขาย Console หลากหลายชนิด',
       shopName: 'GMK Shop',

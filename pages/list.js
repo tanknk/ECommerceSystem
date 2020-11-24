@@ -12,7 +12,7 @@ export default function Home() {
   const [Product, setProduct] = useState([]);
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_PRODUCT_API ? `${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/all` : '/api/product/all')
+      .get(process.env.NEXT_PUBLIC_PRODUCT_API ? `http://${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/all` : '/api/product/all')
       .then((res) => {
         setProduct(res.data);
       })
