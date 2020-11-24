@@ -4,8 +4,6 @@ public class CategoryProduct {
 	private String id, product_id, category_id;
 	private static int count = 1;
 	
-	
-
 	public static int getCount() {
 		return count;
 	}

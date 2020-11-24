@@ -1,15 +1,6 @@
 package SOP.Project;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-
-public class Category implements Serializable {
+public class Category {
 	private String id;
 	private String name;
 	private static int count = 1;

@@ -1,11 +1,8 @@
 package SOP.Project;
 
-import java.io.*;
 import java.util.ArrayList;
 
-import io.swagger.annotations.ApiModelProperty;
-
-public class Product implements Serializable {
+public class Product {
 	private static int count = 1;
 	private String shop_id;
 	private String name, picture, description, id;
