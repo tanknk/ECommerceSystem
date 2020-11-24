@@ -190,7 +190,7 @@ const product = () => {
           <Col lg={12}>
             <h5 className="text-secondary">รีวิว</h5>
           </Col>
-          {Review.error === 'No review data' && (
+          {Review.length === 0 && (
             <Col>
               <h6>ยังไม่มีรีวิว</h6>
             </Col>
