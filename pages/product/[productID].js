@@ -1,6 +1,6 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import {
   Col,
   Row,
@@ -10,8 +10,8 @@ import {
   Badge,
   ToggleButtonGroup,
   ToggleButton,
-} from "react-bootstrap";
-import axios from "axios";
+} from 'react-bootstrap';
+import axios from 'axios';
 
 const product = () => {
   const router = useRouter();
@@ -25,8 +25,8 @@ const product = () => {
   const [Review, setReview] = useState(undefined);
 
   const optionHandle = (id) => {
-    for(let i = 0; i<Product.options.length; i++){
-      if(Product.options[i].id == id){
+    for (let i = 0; i < Product.options.length; i++) {
+      if (Product.options[i].id == id) {
         setPrice(`฿${Product.options[i].price}`);
         setItemImage(Product.options[i].picture);
         setAmount(Product.options[i].amount);
@@ -36,10 +36,9 @@ const product = () => {
 
   useEffect(() => {
     if (productID !== undefined) {
-      const productData = axios.get(process.env.NEXT_PUBLIC_PRODUCT_API ? `${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/${productID}` :
-      `/api/product/${productID}`
-      );
-      const reviewData = axios.get(process.env.NEXT_PUBLIC_REVIEW_API ? `` : `/api/review/${productID}`);
+      const productData = axios.get(process.env.NEXT_PUBLIC_PRODUCT_API ? `${process.env.NEXT_PUBLIC_PRODUCT_API}/product/get/${productID}`
+        : `/api/product/${productID}`);
+      const reviewData = axios.get(process.env.NEXT_PUBLIC_REVIEW_API ? `${process.env.NEXT_PUBLIC_REVIEW_API}/sop-backup/us-central1/app/api/review` : `/api/review/${productID}`);
 
       axios
         .all([productData, reviewData])
@@ -48,21 +47,25 @@ const product = () => {
             const productResponse = responses[0].data;
             const reviewResponse = responses[1].data;
             setProduct(productResponse);
-            setReview(reviewResponse);
+            const reviewResponseFilter = reviewResponse.filter(
+              (item) => (item.product_id.toString() === productID.toString()),
+            );
+            // console.log(reviewResponseFilter);
+            setReview(reviewResponseFilter);
             return productResponse;
-          })
+          }),
         )
         .then((data) => {
           try {
-            axios.get(process.env.NEXT_PUBLIC_SHOP_API ? `` : `/api/shop/${data.shop_id}`).then((res) => {
+            axios.get(process.env.NEXT_PUBLIC_SHOP_API ? `${process.env.NEXT_PUBLIC_SHOP_API}/getShop?Shopid=${data.shop_id}` : `/api/shop/${data.shop_id}`).then((res) => {
               setShop(res.data);
             });
             axios.get(process.env.NEXT_PUBLIC_SHIPPING_API ? `${process.env.NEXT_PUBLIC_SHIPPING_API}/shipping_option/shop/${data.shop_id}` : `/api/shipping/${data.shop_id}`).then((res) => {
               setShipping(res.data);
             });
           } catch (error) {
-            console.log(error)
-            router.push("/");
+            console.log(error);
+            router.push('/');
           }
         });
     }
@@ -85,7 +88,7 @@ const product = () => {
                 src={ItemImage || Product.picture}
                 rounded
                 fluid
-                style={{ width: "300px", height: "250px" }}
+                style={{ width: '300px', height: '250px' }}
               />
             </Card>
           </Col>
@@ -118,7 +121,7 @@ const product = () => {
                     value={item.id}
                     className="mx-1"
                     size="sm"
-                    style={{ borderRadius: "0.25rem" }}
+                    style={{ borderRadius: '0.25rem' }}
                     onClick={
                       (() => optionHandle(item.id))
                     }
@@ -129,7 +132,13 @@ const product = () => {
               </ToggleButtonGroup>
               <div className="mt-2">
                 {Amount !== undefined && Amount !== 0 ? (
-                  <p style={{ fontSize: 15 }}>มีสินค้าทั้งหมด {Amount} ชิ้น</p>
+                  <p style={{ fontSize: 15 }}>
+                    มีสินค้าทั้งหมด
+                    {' '}
+                    {Amount}
+                    {' '}
+                    ชิ้น
+                  </p>
                 ) : Amount !== undefined && Amount === 0 ? (
                   <p style={{ fontSize: 15 }}>สินค้าหมด</p>
                 ) : null}
@@ -164,10 +173,14 @@ const product = () => {
           <Col>
             <h5 className="text-secondary">รายละเอียดสินค้า</h5>
             <p className="mb-2">{Product.description}</p>
-            <p className="mb-2" style={{ display: "inline" }}>
-              ประเภทสินค้า:{" "}
+            <p className="mb-2" style={{ display: 'inline' }}>
+              ประเภทสินค้า:
+              {' '}
               {Product.categorys.map((item) => (
-                <span>{item.name} </span>
+                <span>
+                  {item.name}
+                  {' '}
+                </span>
               ))}
             </p>
           </Col>
@@ -177,15 +190,15 @@ const product = () => {
           <Col lg={12}>
             <h5 className="text-secondary">รีวิว</h5>
           </Col>
-          {Review.error === "No review data" && (
+          {Review.error === 'No review data' && (
             <Col>
               <h6>ยังไม่มีรีวิว</h6>
             </Col>
           )}
-          {Review.reviews &&
-            Review.reviews.map((item) => (
-              <Col lg={12}>
-                <p>{`ผู้ใช้: ${item.username}`}</p>
+          {Review
+            && Review.map((item) => (
+              <Col lg={12} key={item.review_id}>
+                <p>{`ผู้ใช้: ${item.user_id}`}</p>
                 <p>{`คะแนน: ${item.rank}`}</p>
                 <p>{`ความคิดเห็น: ${item.content}`}</p>
                 <hr />
